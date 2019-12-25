@@ -23,10 +23,6 @@ exports.createAccount = function(account, callback){
 
 exports.getAccountByUsername = function(username, callback){
 	accountRepository.getAccountByUsername(username, callback)
-}
-
-exports.loginRequest = function(account, callback){
-	console.log("account user name in BL: ", account.username)
-	accountRepository.getAccountByUsername(account.username, callback)
 	
 }
+

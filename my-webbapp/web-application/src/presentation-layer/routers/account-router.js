@@ -27,7 +27,7 @@ router.post('/createAccount', function(request,response){
 
 router.get('/getAllAccounts', function(request,response){
     accountManager.getAllAccounts(function(array, accounts){
-        console.log("ALL ACCOUNTS:", accounts)
+        console.log("******ALL ACCOUNTS:", accounts)
     })
 })
 
@@ -36,17 +36,18 @@ router.get('/login', function(request, response){
         username: request.query.username,
         password: request.query.password
       };
+    
+	accountManager.getAccountByUsername(enteredAccount.username, function(errors, accounts){
 
-      
-      
-	accountManager.getAccountByUsername(enteredAccount.username, function(errors, account){
-
-        console.log("*******within accountrouter callback function: ", account, errors)
-        console.log("account that is trying to login:", enteredAccount)
+        console.log("*******within accountrouter callback function: ", accounts, errors)
+        if(enteredAccount.password.equals(accounts.password)){
+            console.log("SUCESSFULL LOGIN")
+        }
+        response.render("account-login.hbs")
         
     })
     
-    response.render("account-login.hbs")
+    
 })
 
 router.get("/", function(request,response){
