@@ -35,7 +35,6 @@ exports.getAccountByUsername = function(username, callback){
 		if(error){
 			callback(['databaseError'], null)
 		}else{
-			console.log("FROM DATA ACESS LAYER FETCHED ACC: ", accounts[0])
 			callback([], accounts[0]) //skippar att skicka array med account i och hämtar bara objectet account
 		}
 	})
