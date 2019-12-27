@@ -8,11 +8,11 @@ exports.getAllAccounts = function(callback){
 exports.createAccount = function(account, callback){
 	
 	// Validate the account.
-	console.log("account manager")
-	console.log("account: ", account)
+	console.log("ACCOUNT MANAGER: account: ", account)
 	const errors = accountValidator.getErrorsNewAccount(account)
 	
 	if(0 < errors.length){
+		console.log("ACCOUNT MANAGER Errors creating account, errors.lenght > 0", errors)
 		callback(errors, null)
 		return
 	}

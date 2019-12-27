@@ -48,7 +48,7 @@ exports.getAccountByUsername = function(username, callback){
 	Success value: The id of the new account.
 */
 exports.createAccount = function(account, callback){
-	
+	console.log("ACCOUNT REPOSITORY/createAccount: account: ", account)
 	const query = `INSERT INTO accounts (username, password) VALUES (?, ?)`
 	const values = [account.username, account.password]
 	

@@ -7,18 +7,27 @@ const accountManager = require('../../business-logic-layer/account-manager')
 
 //create account
 router.post('/createAccount', function(request,response){
-    console.log("HEJ FROM SIGNUP")
+    console.log("ACCOUNT ROUTER/createAccount")
     const account = {
       username: request.body.username,
-      password: request.body.password
+      password: request.body.password,
+      email: request.body.email,
+      confirmationPassword: request.body.confirmationPassword
     };
-    console.log("Account from ROUTER:", account.username);
+    console.log("ACCOUNT ROUTER/createAccount: creating account:", account);
     
     accountManager.createAccount(account, function(errors, accounts){
-        if(errors){
-            console.log("sending over errors: ", errors)
-            response.render("account-signup.hbs", errors)
-        }})
+        if(errors.length > 0){
+            const error = {
+                // Only printing out the first error in the stack at the moment. 
+                error: errors[0]
+            }
+            console.log("sending over errors: ", errors[0])
+            response.render("account-signup.hbs", error)
+        }else{
+            response.render("account-login.hbs")
+        }
+    })
       
 
 });
