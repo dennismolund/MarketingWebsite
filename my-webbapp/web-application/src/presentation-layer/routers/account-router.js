@@ -37,7 +37,7 @@ router.get('/getAllAccounts', function(request,response){
     })
 })
 
-router.get('/login', function(request, response){
+router.get('/login', function(request, response){ // This should be POST avoid query string with uname pswrd in URL.
     const enteredAccount = {
         username: request.query.username,
         password: request.query.password
