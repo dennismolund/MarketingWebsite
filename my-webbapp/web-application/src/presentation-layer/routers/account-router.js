@@ -52,8 +52,6 @@ router.get('/login', function(request, response){ // This should be POST avoid q
         response.render("account-login.hbs")
         
     })
-    
-    
 })
 
 router.get("/", function(request,response){

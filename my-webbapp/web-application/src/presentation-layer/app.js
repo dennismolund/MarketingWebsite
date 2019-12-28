@@ -1,6 +1,7 @@
 const path = require('path')
 const express = require('express')
 const expressHandlebars = require('express-handlebars')
+const session = require('express-session')
 
 const variousRouter = require('./routers/various-router')
 const accountRouter = require('./routers/account-router')
@@ -18,6 +19,13 @@ app.engine('hbs', expressHandlebars({
 
 // Handle static files in the public folder.
 app.use(express.static(path.join(__dirname, 'public')))
+
+// Handle session
+app.use(session({
+	saveUninitialized: false,
+	resave: false,
+	secret: 'menace'
+}))
 
 //body parser middleware
 app.use(express.json());
