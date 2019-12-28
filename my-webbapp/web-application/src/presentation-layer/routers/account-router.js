@@ -2,9 +2,6 @@ const express = require('express')
 const router = express.Router()
 const accountManager = require('../../business-logic-layer/account-manager')
 
-
-
-
 //create account
 router.post('/createAccount', function(request,response){
     console.log("ACCOUNT ROUTER/createAccount")
@@ -49,7 +46,7 @@ router.get('/login', function(request, response){
 	accountManager.getAccountByUsername(enteredAccount.username, function(errors, accounts){
 
         console.log("*******within accountrouter callback function: ", accounts, errors)
-        if(enteredAccount.password.equals(accounts.password)){
+        if(enteredAccount.password == (accounts.password)){
             console.log("SUCESSFULL LOGIN")
         }
         response.render("account-login.hbs")
@@ -67,7 +64,5 @@ router.get("/signup", function(request,response){
     console.log("RELOAD I SIGNUP")
 	response.render("account-signup.hbs")
 })
-
-
 
 module.exports = router
