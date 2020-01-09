@@ -3,12 +3,10 @@ const express = require('express')
 const router = express.Router()
 
 router.get("/", function(request, response){
-	response.render("home.hbs")
-})
-
-router.get("/calendar", function(request,response){
-	
-	response.render("calendar.hbs")
+	if(request.session.isLoggedIn){
+		response.render("home.hbs", {username: request.session.currentAccount.username, isLoggedIn: request.session.isLoggedIn})
+	}
+	else{response.render("home.hbs")}
 })
 
 router.get("/cv", function(request,response){
