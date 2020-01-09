@@ -2,12 +2,12 @@
 <div class="container">
     <div class="section">
     <div class="card">
-        <h3 class="card-header" id="monthAndYear">{{monthAndYear}}</h3>
+        <h3 class="card-header" id="monthAndYear">{{model.monthAndYear}}</h3>
         <table class="table" id="calendar">
             <thead>
                 <tr>
                     <th>time</th>
-                    <th>Tue</th>
+                    <th>Tue {{model.thuesday}}th</th>
                     <th>Wed</th>
                     <th>Thu</th>        
                 </tr>
@@ -15,34 +15,38 @@
             <tbody id="calendar-body">
                <tr>
                    <td>16:00 - 17:00</td>
-                    {{#if bookings}}
-                        {{#each bookings}}
-                            <td>{{this.date}}</td>
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
                         {{/each}}
                     {{/if}}
-                
                </tr>
                <tr>
                     <td>17:00 - 18:00</td>
-                    <td>Not Available</td>
-                    <td>Not Available</td>
-                    <td>Not Available</td>
-                   
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
+                        {{/each}}
+                    {{/if}}
                    
                </tr>
                <tr>
                    <td>18:00 - 19:00</td>
-                   <td>Not Available</td>
-                    <td>Not Available</td>
-                    <td>Not Available</td>
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
+                        {{/each}}
+                    {{/if}}
                     
                </tr>
 
                <tr>
                    <td>19:00 - 20:00</td>
-                   <td>Not Available</td>
-                    <td>Not Available</td>
-                    <td>Not Available</td>
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
+                        {{/each}}
+                    {{/if}}
                    
                </tr>
 

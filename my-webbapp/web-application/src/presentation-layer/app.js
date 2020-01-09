@@ -34,12 +34,6 @@ app.engine('hbs', expressHandlebars({
 // Handle static files in the public folder.
 app.use(express.static(path.join(__dirname, 'public')))
 
-// Handle session
-app.use(session({
-	saveUninitialized: false,
-	resave: false,
-	secret: 'menace'
-}))
 
 //body parser middleware
 app.use(express.json());
