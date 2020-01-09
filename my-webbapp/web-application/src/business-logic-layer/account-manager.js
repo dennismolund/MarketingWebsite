@@ -4,6 +4,9 @@ const accountValidator = require('./account-validator')
 exports.getAllAccounts = function(callback){
 	accountRepository.getAllAccounts(callback)
 }
+exports.getAllExperiences = function(callback){
+	accountRepository.getAllExperiences(callback)
+}
 
 exports.createAccount = function(account, callback){
 	
@@ -20,7 +23,8 @@ exports.createAccount = function(account, callback){
 	accountRepository.createAccount(account, callback)
 }
 
-exports.getAccountByUsername = function(username, callback){
+exports.getAccountByUsername = function(username, callback){	
 	accountRepository.getAccountByUsername(username, callback)
 	
 }
+

@@ -62,3 +62,19 @@ exports.createAccount = function(account, callback){
 	})
 	
 }
+
+exports.getAllExperiences = function(callback){
+	
+	const query = `SELECT * FROM experience order by company`
+	const values = []
+	
+	db.query(query, values, function(error, experience){
+		if(error){
+			callback(['databaseError'], null)
+		}else{
+			console.log("From DB: ", experience)
+			callback([], experience)
+		}
+	})
+	
+}

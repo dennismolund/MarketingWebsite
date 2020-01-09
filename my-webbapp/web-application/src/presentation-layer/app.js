@@ -5,8 +5,22 @@ const session = require('express-session')
 
 const variousRouter = require('./routers/various-router')
 const accountRouter = require('./routers/account-router')
+const bookingRouter = require('./routers/booking-router')
 
-const app = express()
+const redis = require('redis')
+
+const app = express() 
+
+//let RedisStore = require('connect-redis')(session)
+//let client = redis.createClient()
+
+
+
+app.use(session({
+	secret: 'keyboard cat',
+	resave: false,
+	saveUninitialized: false,
+  }))
 
 // Setup express-handlebars.
 app.set('views', path.join(__dirname, 'views'))
@@ -34,6 +48,7 @@ app.use(express.urlencoded({extended:false}));
 // Attach all routers.
 app.use('/', variousRouter)
 app.use('/accounts', accountRouter)
+app.use('/booking', bookingRouter)
 
 
 // Start listening for incoming HTTP requests!
