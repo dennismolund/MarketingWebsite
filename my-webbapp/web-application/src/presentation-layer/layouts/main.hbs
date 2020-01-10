@@ -26,7 +26,7 @@
 				</div>
 				<div class="navbar-end">
 						<div class="navbar-item">
-							{{#if isLoggedIn}}
+							{{#if username}}
 								<a href="/accounts/logout" class="navbar-item "><span class="icon">
 									<p>Logout <br></p>
   								</span></a>
@@ -41,7 +41,7 @@
 			</div>
 		</div>
 	</nav>
-	{{#if isLoggedIn}}
+	{{#if username}}
         <p> 
             <strong>Logged in as: {{username}}</strong>
         </p>

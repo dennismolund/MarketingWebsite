@@ -39,18 +39,17 @@ router.post('/login', function(request, response){ // This should be POST avoid 
       };
     
 	accountManager.getAccountByUsername(enteredAccount.username, function(errors, accounts){
-        const module ={
+        const model ={
             error: errors,
             account: accounts
         }
-        console.log("account module: ", module.account.username)
+        console.log("account module: ", model.account.username)
 
-        if(enteredAccount.password == module.account.password){
+        if(enteredAccount.password == model.account.password){
             console.log("SUCESSFULL LOGIN")
             
-            request.session.currentAccount = {username: module.account.username}
-            request.session.isLoggedIn = true
-            response.render("home.hbs", {username: request.session.currentAccount.username, isLoggedIn: request.session.isLoggedIn})
+            request.session.currentAccount = {username: model.account.username}
+            response.render("home.hbs", {username: request.session.currentAccount.username})
         }
         else{response.render("account-login.hbs")}
         
@@ -73,6 +72,10 @@ router.get('/getAllAccounts', function(request,response){
     accountManager.getAllAccounts(function(array, accounts){
         console.log("ALL ACCOUNTS:", accounts)
     })
+})
+
+router.get('/signup', function(request,response){
+    response.render("account-signup.hbs")
 })
 
 router.get("/getAllexperiences", function(request, response){
