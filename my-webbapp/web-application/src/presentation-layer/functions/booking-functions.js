@@ -1,5 +1,14 @@
 const functions = require('express')
 
+const dummyData = [{id: 1, date: 14, time: 1}, {id: 2, date: 15, time: 0}, {id: 3, date: 15, time: 3}, {id: 4, date: 16, time: 3}];
+const SUNDAY = 0
+const MONDAY = 1
+const TUESDAY = 2
+const WEDNESDAY = 3
+const THURSDAY = 4
+const FRIDAY = 5
+const SATURDAY = 6
+
 
 let today = new Date();
 let currentMonth = today.getMonth();
@@ -7,20 +16,27 @@ let currentYear = today.getFullYear();
 let currentDate = today.getDate();
 let currentDay = today.getDay();
 
+let startDate = currentDate;
+let datesToShow = getDatesToShow(startDate, currentDay)
 
-let datesToShow = getDatesToShow(currentDate)
 
-
-let days = ["Sunday", "Monday", "Thuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 let weekDay = days[currentDay]
 let month = months[currentMonth];
 let year = currentYear
 
+let tuesday = ["Book now", "Book now", "Book now", "Book now"]
+let wednesDay = ["Book now", "Book now", "Book now", "Book now"]
+let thursday = ["Book now", "Book now", "Book now", "Book now"]
 
-let bookings = ["Not Available", "Not Available", "Not Available"]
+let cellInfo = [tuesday, wednesDay, thursday]
+bookedArray()
 
-function daysUntilThuesday(weekDay){
+
+
+// Returns number of days from todays date until thuesday, starting from Friday
+function daysUntilTuesday(weekDay){
     switch (weekDay){
         case 0: return 2; break;
         case 1: return 1; break;
@@ -33,15 +49,15 @@ function daysUntilThuesday(weekDay){
 }
 
 // Returns todays date + the days until thursday. Calculates for month shift. ** NOT READY FOR YEAR SHIFT **
-function getDatesToShow(currentDate){
-    const thuesday = currentDate + daysUntilThuesday(currentDay)
-    const wednesDay = thuesday + 1
-    const thursday = thuesday + 2
+function getDatesToShow(startDate, weekDay){
+    const tuesday = startDate + daysUntilTuesday(weekDay)
+    const wednesDay = tuesday + 1
+    const thursday = tuesday + 2
     const monthDays = getMonthDays(currentMonth)
     const datesToShow = []
 
-    if(thuesday > monthDays){ datesToShow.push(thuesday - monthDays) }
-    else { datesToShow.push(thuesday) }
+    if(tuesday > monthDays){ datesToShow.push(tuesday - monthDays) }
+    else { datesToShow.push(tuesday) }
 
     if(wednesDay > monthDays){ datesToShow.push(wednesDay - monthDays) }
     else{ datesToShow.push(wednesDay) }
@@ -58,6 +74,7 @@ function isLeapYear(year){
     }
     return false;
 }
+
 // Returns number of days in the month. 
 function getMonthDays(month){
     if(month == 0 || month == 2 || month == 4 || month == 6 || month == 7 || month == 9 || month == 11){
@@ -72,9 +89,28 @@ function getMonthDays(month){
     return 30
 }
 
+function bookedArray(){
+    for (dates in datesToShow){
+        for(date in dummyData){
+            if (datesToShow[dates] == dummyData[date].date){
+                cellInfo[dates][date] = "NOT AVAILABLE"
+            }
+        }
+    }
+}
+
+exports.nextWeek = function nextWeek(date){
+    console.log("nextWeek date: ", date)
+    let datesToShow = []
+    date = parseInt(date) + 7
+    datesToShow = getDatesToShow(date, TUESDAY)
+    console.log("nextWeek: datesToShow: ", datesToShow)
+    return datesToShow
+}
+
 exports.weekDay = weekDay
 exports.currentDate = currentDate
-exports.bookings = bookings
+exports.cellInfo = cellInfo
 exports.month = month
 exports.year = year
 exports.datesToShow = datesToShow
