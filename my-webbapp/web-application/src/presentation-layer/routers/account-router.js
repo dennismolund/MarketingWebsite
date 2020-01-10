@@ -32,7 +32,7 @@ router.post('/createAccount', function(request,response){
 
 
 
-router.post('/login', function(request, response){ // This should be POST avoid query string with uname pswrd in URL.
+router.post('/login', function(request, response){ 
     const enteredAccount = {
         username: request.body.username,
         password: request.body.password
@@ -43,7 +43,7 @@ router.post('/login', function(request, response){ // This should be POST avoid 
             error: errors,
             account: accounts
         }
-        console.log("account module: ", model.account.username)
+        console.log("account model: ", model.account.username)
 
         if(enteredAccount.password == model.account.password){
             console.log("SUCESSFULL LOGIN")
@@ -66,6 +66,10 @@ router.get("/logout", function(request,response){
         // cannot access session here
       })
 	response.render("home.hbs")
+})
+
+router.get('/signup', function(request,response){
+    response.render("account-signup.hbs")
 })
 
 router.get('/getAllAccounts', function(request,response){

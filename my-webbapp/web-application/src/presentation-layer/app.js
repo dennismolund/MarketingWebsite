@@ -34,6 +34,7 @@ app.engine('hbs', expressHandlebars({
 // Handle static files in the public folder.
 app.use(express.static(path.join(__dirname, 'public')))
 
+
 //body parser middleware
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));

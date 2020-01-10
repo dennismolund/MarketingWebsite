@@ -4,30 +4,38 @@ const accountManager = require('../../business-logic-layer/account-manager')
 const bookingManager = require('../../business-logic-layer/booking-manager')
 const functions = require('../functions/booking-functions')
 
-const model = {
-    bookings: functions.bookings,
-    monthAndYear: functions.monthAndYear,
-    thuesday: functions.thuesday,
-    wednesday: functions.wednesday,
-    thursday: functions.thursday
+const dummyData = [{id: 1, date: 14, time: 1}, {id: 2, date: 15, time: 0}];
 
-}
-console.log(model.bookings);
+
 
 router.get("/", function(request,response){
-    response.render("booking.hbs", {model})
+    const model = {
+        weekDay: functions.weekDay,
+        currentDate: functions.currentDate,
+        bookings: functions.bookings,
+        month: functions.month,
+        year: functions.year,
+        datesToShow: functions.datesToShow
+    }
+    response.render("booking.hbs", {model, dummyData})
 })
 
+router.post("/next",function(request,response){
+    const date = request.body.date;
+    
+    const model = {
+        weekDay: functions.weekDay,
+        currentDate: functions.currentDate,
+        bookings: functions.bookings,
+        month: functions.month,
+        year: functions.year,
+        datesToShow: functions.datesToShow
+    }
 
-//Skickar iväg det man tryckte på innan??
-router.post("/addbooking",function(request,response){
-    let bookedDate = request.body.date
-    console.log("booked date: ",bookedDate);
-    response.render("booking.hbs", {model})
+    response.render("booking.hbs", {model, dummyData})
 })
-
-
 module.exports = router
+
 
 /*
 bookingManager.getAllBookings(function(array, bookings){
@@ -35,4 +43,3 @@ bookingManager.getAllBookings(function(array, bookings){
         response.render("booking.hbs", {bookings, monthAndYear})
     })
 */
-
