@@ -5,10 +5,14 @@ const bookingManager = require('../../business-logic-layer/booking-manager')
 const functions = require('../functions/booking-functions')
 
 const model = {
+    weekDay: functions.weekDay,
+    currentDate: functions.currentDate,
     bookings: functions.bookings,
-    monthAndYear: functions.monthAndYear,
-    thuesday: functions.thuesday
+    month: functions.month,
+    year: functions.year,
+    datesToShow: functions.datesToShow
 }
+console.log("BOOKING-ROUTER model: ", model)
 
 router.get("/", function(request,response){
     response.render("booking.hbs", {model})

@@ -2,14 +2,14 @@
 <div class="container">
     <div class="section">
     <div class="card">
-        <h3 class="card-header" id="monthAndYear">{{model.monthAndYear}}</h3>
+        <h3 class="card-header" id="monthAndYear">{{model.year}} - {{model.weekDay}}, {{model.month}} {{model.currentDate}}</h3>
         <table class="table" id="calendar">
             <thead>
                 <tr>
                     <th>time</th>
-                    <th>Tue {{model.thuesday}}th</th>
-                    <th>Wed</th>
-                    <th>Thu</th>        
+                    <th>Tue {{model.datesToShow.[0]}}th</th>
+                    <th>Wed {{model.datesToShow.[1]}}th</th>
+                    <th>Thu {{model.datesToShow.[2]}}th</th>        
                 </tr>
             </thead>
             <tbody id="calendar-body">
