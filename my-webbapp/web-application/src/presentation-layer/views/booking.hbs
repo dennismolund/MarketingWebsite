@@ -1,66 +1,103 @@
+    <div class="container">
+    <script src="../public/booking.js"></script>
+    <noscript>You need to enable javascript to book an appointment</noscript>
+        <div class="section">
+            <div class="card" id="calendarView">
+                <h3 class="card-header" id="calendarHeader">Todays date</h3>
+                <table class="table" id="calendar">
+                    <thead>
+                        <tr id="row0">
+                            <th>Time</th>
+                            <th id="head1">Tue, row0col1</th>
+                            <th id="head2">Wed, row0col2</th>
+                            <th id="head3">Thu, row0col3</th>
+                        </tr>
+                    </thead>
+                    <tbody id="calendar-body">
+                    <tr id="row1">
+                        <td>16:00 - 17:00</td>
+                            <td id="00">Available</td>
+                            <td id="01">Available</td>
+                            <td id="02">Available</td>
+                    </tr>
+                    <tr id="row2">
+                            <td>17:00 - 18:00</td>
+                            <td id="10">Available</td>
+                            <td id="11">Available</td>
+                            <td id="12">Available</td>
+                        
+                    </tr>
+                    <tr id="row3">
+                        <td>18:00 - 19:00</td>
+                            <td id="20">Available</td>
+                            <td id="21">Available</td>
+                            <td id="22">Available</td>
+                    </tr>
 
-<div class="container">
-    <div class="section">
-    <div class="card">
-        <h3 class="card-header" id="monthAndYear">{{model.year}} - {{model.weekDay}}, {{model.month}} {{model.currentDate}}</h3>
-        <table class="table" id="calendar">
-            <thead>
-                <tr>
-                    <th>time</th>
-                    <th>Tue {{model.datesToShow.[0]}}th</th>
-                    <th>Wed {{model.datesToShow.[1]}}th</th>
-                    <th>Thu {{model.datesToShow.[2]}}th</th>        
-                </tr>
-            </thead>
-            <tbody id="calendar-body">
-               <tr>
-                   <td>16:00 - 17:00</td>
-                    {{#if model.cellInfo}}
-                            <td>{{model.cellInfo.[0].[0]}}</td>
-                            <td>{{model.cellInfo.[1].[0]}}</td>
-                            <td>{{model.cellInfo.[2].[0]}}</td>
-                    {{/if}}
-               </tr>
-               <tr>
-                    <td>17:00 - 18:00</td>
-                    {{#if model.cellInfo}}
-                            <td>{{model.cellInfo.[0].[1]}}</td>
-                            <td>{{model.cellInfo.[1].[1]}}</td>
-                            <td>{{model.cellInfo.[2].[1]}}</td>
-                    {{/if}}
-                   
-               </tr>
-               <tr>
-                   <td>18:00 - 19:00</td>
-                    {{#if model.cellInfo}}
-                            <td>{{model.cellInfo.[0].[2]}}</td>
-                            <td>{{model.cellInfo.[1].[2]}}</td>
-                            <td>{{model.cellInfo.[2].[2]}}</td>
-                    {{/if}}
-                    
-               </tr>
-
-               <tr>
-                   <td>19:00 - 20:00</td>
-                    {{#if model.cellInfo}}
-                            <td>{{model.cellInfo.[0].[3]}}</td>
-                            <td>{{model.cellInfo.[1].[3]}}</td>
-                            <td>{{model.cellInfo.[2].[3]}}</td>
-                    {{/if}}
-                   
-               </tr>
-            </tbody>
-        </table>
-        <form action="/booking/next" method="post" class="form-inline">
-
-            <button class="btn btn-outline-primary col-sm-6" type="submit" name="date"value={{model.datesToShow.[0]}}>Previous</button>
-
-            <button class="btn btn-outline-primary col-sm-6" type="submit" name="date" value={{model.datesToShow.[0]}}>Next</button>
-        </form>
-        
+                    <tr id="row4">
+                        <td>19:00 - 20:00</td>
+                            <td id="30">Available</td>
+                            <td id="31">Available</td>
+                            <td id="32">Available</td>
+                    </tr>
+                    </tbody>
+                </table>
+                <form action="/booking/next" method="post" class="form-inline">
+                    <button class="btn btn-outline-primary col-sm-6" id="prevBtn">Previous</button>
+                    <button class="btn btn-outline-primary col-sm-6" id="nextBtn">Next</button>
+                </form>        
+            </div>
+            {{#if username}}
+            <form action="/booking/book" method="POST">
+                <div class="field" id="bookingForm">
+                    <div id="bookedDate"><p id="bookedDate"></p></div>
+                    <input type="hidden" id="inputDate" name="inputDate">
+                    <label class="label">Email</label>
+                    <div class="control has-icons-left has-icons-right">
+                        <input class="input" type="email" placeholder="Email" name="email" value={{email}}>
+                        <span class="icon is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                    </div>
+                    <label class="label">What do you want help with?</label>
+                    <div class="control">
+                        <textarea class="textarea" name="info"></textarea>
+                    </div>
+                    <br>
+                    <button class="button is-info is-block is-medium" id="submitBtn">Finnish</button>
+                </div>
+            </form>
+            {{else}}
+                <div class="container has-text-centered" id="loginView">
+                    <div class="column is-4 is-offset-4">
+                        <h3 class="title has-text-black">Login</h3>
+                        <hr class="login-hr">
+                        <p class="subtitle has-text-black">Please login to create a new booking</p>
+                        <div class="box">
+                            <form action="/accounts/booking-login" method="post">
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="input is-large" name="username" required="required" placeholder="Username" autofocus="">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <div class="control">
+                                        <input class="input is-large" type="password" required="required" name="password" placeholder="Your Password">
+                                    </div>
+                                </div>
+                                <button class="button is-block is-info is-large is-fullwidth">Login</button>
+                            </form>
+                        </div>
+                        <p class="has-text-grey">
+                            <a href="/accounts/signup">Sign Up</a> &nbsp;·&nbsp;
+                            <a href="../">Forgot Password</a> &nbsp;·&nbsp;
+                            <a href="../">Need Help?</a>
+                        </p>
+                    </div>
+                </div>
+            {{/if}}
+        </div>
     </div>
-    </div>
-</div>
 
 
 

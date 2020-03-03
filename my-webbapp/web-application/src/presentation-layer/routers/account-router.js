@@ -32,7 +32,7 @@ router.post('/createAccount', function(request,response){
 
 
 
-router.post('/login', function(request, response){ 
+router.post('/login', function(request, response){
     const enteredAccount = {
         username: request.body.username,
         password: request.body.password
@@ -43,15 +43,41 @@ router.post('/login', function(request, response){
             error: errors,
             account: accounts
         }
-        console.log("account model: ", model.account.username)
-
-        if(enteredAccount.password == model.account.password){
+        if(errors.length > 0){
+            console.log("Error from database: ", model.error)
+            response.render("account-login.hbs", {error: errors[0]})
+        }
+        else if(enteredAccount.password == model.account.password){      // ! *** Check password in BLL ?
             console.log("SUCESSFULL LOGIN")
-            
-            request.session.currentAccount = {username: model.account.username}
+            request.session.currentAccount = {username: model.account.username, email: model.account.email}
             response.render("home.hbs", {username: request.session.currentAccount.username})
         }
-        else{response.render("account-login.hbs")}
+        else{
+            response.render("account-login.hbs", {error: "Wrong username or password"})
+        }
+        
+    })
+})
+router.post('/booking-login', function(request, response){ 
+    const enteredAccount = {
+        username: request.body.username,
+        password: request.body.password
+      };
+    
+	accountManager.getAccountByUsername(enteredAccount.username, function(errors, accounts){
+        const model ={
+            error: errors,
+            account: accounts,
+        }
+        //console.log("account model: ", model.account.username)
+
+        if(enteredAccount.password == model.account.password){      // ! *** Check password in BLL ?
+            console.log("SUCESSFULL LOGIN")
+            
+            request.session.currentAccount = {username: model.account.username, email: model.account.email}
+            response.render("booking.hbs", {username: request.session.currentAccount.username, email: request.session.currentAccount.email})
+        }
+        else{response.render("booking.hbs")}
         
     })
 })

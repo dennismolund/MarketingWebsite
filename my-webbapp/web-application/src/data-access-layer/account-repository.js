@@ -33,9 +33,16 @@ exports.getAccountByUsername = function(username, callback){
 	
 	db.query(query, values, function(error, accounts){
 		if(error){
-			callback(['databaseError'], null)
-		}else{
+			console.log("if error")
+			callback([error], null)
+		}
+		else if(accounts.length > 0){
+			console.log("else if: ", accounts)
 			callback([], accounts[0]) //skippar att skicka array med account i och hämtar bara objectet account
+		}
+		else{
+			console.log("Else no account with that username")
+			callback(["Wrong username or password"], null)
 		}
 	})
 	
@@ -49,13 +56,14 @@ exports.getAccountByUsername = function(username, callback){
 */
 exports.createAccount = function(account, callback){
 	console.log("ACCOUNT REPOSITORY/createAccount: account: ", account)
-	const query = `INSERT INTO accounts (username, password) VALUES (?, ?)`
-	const values = [account.username, account.password]
+	const query = `INSERT INTO accounts (username, password, email) VALUES (?, ?, ?)`
+	const values = [account.username, account.password, account.email]
+	
 	
 	db.query(query, values, function(error, results){
 		if(error){
 			// TODO: Look for usernameUnique violation.
-			callback(['databaseError'], null)
+			callback([error], null)
 		}else{
 			callback([], results.insertId)
 		}

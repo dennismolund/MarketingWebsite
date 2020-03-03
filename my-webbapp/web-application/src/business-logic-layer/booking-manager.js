@@ -6,4 +6,8 @@ exports.getAllBookings= function(callback){
 	bookingRepository.getAllBookings(callback)
 }
 
+exports.createBooking = function(booking, callback){
+	bookingRepository.createBooking(booking, callback)
+}
+
 
