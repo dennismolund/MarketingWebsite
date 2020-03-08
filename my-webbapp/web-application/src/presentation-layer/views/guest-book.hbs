@@ -1,0 +1,55 @@
+<div class="container">
+   <div class="row columns">
+        <!--Welcome-->
+        <div class="column is-half">
+            <article class="message is-light is-medium">
+                <div class="message-header">
+                    <p>Welcome!</p>
+                </div>
+                <div class="message-body">
+                    Did you have a helpful session? Let me or other visitors know about it! 
+                </div>
+            </article>
+        </div>
+        <!--Guestbook form-->
+        {{#if username}}
+            <div class="column is-half">
+                <form action='/guestbook' method="POST">
+                    <label class="label">Guest book</label>
+                    <div class="field">
+                        <label class="label"><i class="far fa-envelope"></i> Message</label>
+                        <p class="control">
+                            <textarea class="textarea" name="message" placeholder="Enter message" required></textarea>
+                        </p>
+                        <button class="button" type="submit">Send post</button>
+                    </div>
+                </form>
+        </div>
+        {{/if}}
+        {{#each allPosts}}
+            <div class="column is-half">
+                <article class="message is-light">
+                    <div class="message-header">
+                    <p>{{username}}</p>
+                    <!-- For admin 
+                    {{#if ../adminSession}}
+                        <form action="../home/delete/{{id}}" method="POST">
+                            <button class="delete" aria-label="delete"></button>
+                        </form>
+                    {{/if}}
+                    -->
+                    </div>
+                    <div class="message-body">
+                    {{message}}
+                    </div>
+                </article>
+            </div>
+        {{/each}}
+    </div>
+<footer class="footer">
+    <div class="container">
+        <div class="content is-small has-text-centered">
+            <p class="">Website built by Dennis Molund and Jacob Carlquist</p>
+        </div>
+    </div>
+</footer>
