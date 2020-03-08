@@ -48,7 +48,7 @@ exports.getAccountByUsername = function(username, callback){
 	Success value: The id of the new account.
 */
 exports.createAccount = function(account, callback){
-	
+	console.log("ACCOUNT REPOSITORY/createAccount: account: ", account)
 	const query = `INSERT INTO accounts (username, password) VALUES (?, ?)`
 	const values = [account.username, account.password]
 	
@@ -58,6 +58,22 @@ exports.createAccount = function(account, callback){
 			callback(['databaseError'], null)
 		}else{
 			callback([], results.insertId)
+		}
+	})
+	
+}
+
+exports.getAllExperiences = function(callback){
+	
+	const query = `SELECT * FROM experience order by company`
+	const values = []
+	
+	db.query(query, values, function(error, experience){
+		if(error){
+			callback(['databaseError'], null)
+		}else{
+			console.log("From DB: ", experience)
+			callback([], experience)
 		}
 	})
 	

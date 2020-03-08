@@ -1,0 +1,69 @@
+
+<div class="container">
+    <div class="section">
+    <div class="card">
+        <h3 class="card-header" id="monthAndYear">{{model.year}} - {{model.weekDay}}, {{model.month}} {{model.currentDate}}</h3>
+        <table class="table" id="calendar">
+            <thead>
+                <tr>
+                    <th>time</th>
+                    <th>Tue {{model.datesToShow.[0]}}th</th>
+                    <th>Wed {{model.datesToShow.[1]}}th</th>
+                    <th>Thu {{model.datesToShow.[2]}}th</th>        
+                </tr>
+            </thead>
+            <tbody id="calendar-body">
+                <form action="/booking/addbooking" method="post">
+                <tr>
+                   <td>16:00 - 17:00</td>
+                    <td>Not Available</td>
+                    <td>Not Available</td>
+                    <td>Not Available</td>
+               </tr>
+               </form>
+               <tr>
+                    <td>17:00 - 18:00</td>
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
+                        {{/each}}
+                    {{/if}}
+                   
+               </tr>
+               <tr>
+                   <td>18:00 - 19:00</td>
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
+                        {{/each}}
+                    {{/if}}
+                    
+               </tr>
+
+               <tr>
+                   <td>19:00 - 20:00</td>
+                    {{#if model.bookings}}
+                        {{#each model.bookings}}
+                            <td>{{this}}</td>
+                        {{/each}}
+                    {{/if}}
+                   
+               </tr>
+
+               
+            </tbody>
+            
+        </table>
+        <form action="/booking/next" method="post" class="form-inline">
+        
+
+            <button class="btn btn-outline-primary col-sm-6" type="submit" name="date" value={{model.datesToShow.[0]}}>Previous</button>
+
+            <button class="btn btn-outline-primary col-sm-6" type="submit" name="date" value={{model.datesToShow.[0]}}>Next</button>
+        </form>
+    </div>
+    </div>
+</div>
+
+
+
