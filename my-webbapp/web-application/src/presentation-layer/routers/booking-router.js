@@ -10,7 +10,6 @@ bookingManager.getAllBookings(function(error, bookings){
     if(error.length > 0){
         console.log("Error getting all bookings")
         if(request.session.currentAccount){
-            module.exports = bookings
             response.render("booking.hbs", {username: request.session.currentAccount.username, email: request.session.currentAccount.email})
         }
         else{response.render("booking.hbs")}

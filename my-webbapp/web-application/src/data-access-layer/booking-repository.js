@@ -20,6 +20,7 @@ const dummyBooking2 = {
 bookings.push(dummyBooking)
 bookings.push(dummyBooking2)
 
+
 exports.getAllBookings = function(callback){
 	console.log("returning bookings array: ", bookings)
 	callback([], bookings)

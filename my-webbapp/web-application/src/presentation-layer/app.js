@@ -6,6 +6,7 @@ const session = require('express-session')
 const variousRouter = require('./routers/various-router')
 const accountRouter = require('./routers/account-router')
 const bookingRouter = require('./routers/booking-router')
+const gbRouter = require('./routers/gb-router')
 
 const redis = require('redis')
 const redisClient = redis.createClient({host: 'redis-database'})
@@ -52,6 +53,7 @@ res.sendFile(path.join(__dirname, 'public', 'javatest.js'));
 app.use('/', variousRouter)
 app.use('/accounts', accountRouter)
 app.use('/booking', bookingRouter)
+app.use('/guestbook', gbRouter)
 
 
 // Start listening for incoming HTTP requests!
